@@ -190,6 +190,11 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@datastructures-js/linked-list@^5.2.4":
+  "integrity" "sha512-bCrDMBblU53Z2ayFKMCDgCd82wEE0ncItDwhfv25KNHWHPLAm2exeJkXUt99tnZ/o6kpHWBRom0XnppsJ/ZjTg=="
+  "resolved" "https://registry.npmjs.org/@datastructures-js/linked-list/-/linked-list-5.2.4.tgz"
+  "version" "5.2.4"
+
 "@fortawesome/fontawesome-common-types@6.2.0":
   "integrity" "sha512-rBevIsj2nclStJ7AxTdfsa3ovHb1H+qApwrxcTVo+NNdeJiB9V75hsKfrkG5AwNcRUNxrPPiScGYCNmLMoh8pg=="
   "resolved" "https://registry.npmjs.org/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.2.0.tgz"

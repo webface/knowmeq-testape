@@ -8,11 +8,7 @@ import Image from 'next/image';
 import prisma from '../lib/prisma';
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const quizzes = await prisma.quiz.findMany({
-    where: {
-      published: true,
-    },
-  });
+  const quizzes = await prisma.quiz.findMany({});
   return {
     props: { quizzes },
   };
@@ -63,15 +59,19 @@ const Home: NextPage<Props> = ({ quizzes }) => {
             ? quizzes.map((quiz: Quiz) => {
                 return (
                   <a
-                    href={`tests/${quiz.slug}`}
+                    href={quiz.published ? `quiz/${quiz.slug}` : '#'}
                     key={quiz.id}
                     className='mt-6 w-96 rounded-xl p-6 text-left hover:text-white focus:text-white'
                   >
                     <h3 className='text-2xl font-bold'>{quiz.name}</h3>
-                    <p className='mt-4 text-xl'>
-                      Find in-depth information about Next.js features and its
-                      API.
-                    </p>
+                    {quiz.published ? (
+                      <p className='mt-4 text-xl'>
+                        Find in-depth information about Next.js features and its
+                        API. Take the Quiz
+                      </p>
+                    ) : (
+                      'Not Available'
+                    )}
                   </a>
                 );
               })
@@ -82,7 +82,7 @@ const Home: NextPage<Props> = ({ quizzes }) => {
       <footer className='flex h-24 w-full items-center justify-center border-t'>
         <a
           className='flex items-center justify-center gap-2'
-          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+          href='https://www.webfacemedia.com'
           target='_blank'
           rel='noopener noreferrer'
         >

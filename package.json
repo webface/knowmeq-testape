@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@datastructures-js/linked-list": "^5.2.4",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
