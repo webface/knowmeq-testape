@@ -5,6 +5,7 @@ import {
 import { Question } from '@prisma/client';
 import { useCallback, useEffect, useState } from 'react';
 import { AQuestion, QuizContextData } from '../context/QuizContext';
+import { correctArr, Result } from '../pages/api/submit';
 
 function useQuizContextValue(): QuizContextData {
   const [questions, setQuestions] = useState<DoublyLinkedList<AQuestion>>(
@@ -15,12 +16,15 @@ function useQuizContextValue(): QuizContextData {
   >(questions.head());
 
   const [quiz, setQuiz] = useState('');
-
+  const [isComplete, setComplete] = useState(false);
+  const [score, setScore] = useState();
   const nextQuestion = (): void => {
     if (currentQuestion.hasNext()) {
-      setCurrentQuestion(currentQuestion.getNext());
+      if (!!currentQuestion.getValue().answer) {
+        setCurrentQuestion(currentQuestion.getNext());
+      }
     } else {
-      //submit
+      setComplete(true);
     }
   };
 
@@ -43,6 +47,31 @@ function useQuizContextValue(): QuizContextData {
     setCurrentQuestion(dll.head());
   }, []);
 
+  const submit = async (): Promise<Result | undefined> => {
+    try {
+      let results: correctArr[] = [];
+      let quizID: number = 0;
+      questions.forEach((node, position) => {
+        const { quizId, answer, id } = node.getValue();
+        quizID = quizId;
+        results.push({ question: id, answer: answer });
+      });
+      const body = { quizId: quizID, results };
+      const response = await fetch(`/api/submit`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const { score } = await response.json();
+      console.log({ score });
+      setScore(score);
+      return score;
+    } catch (error) {
+      console.error(error);
+    }
+    return undefined;
+  };
+
   return {
     quiz,
     questions,
@@ -50,7 +79,10 @@ function useQuizContextValue(): QuizContextData {
     nextQuestion,
     prevQuestion,
     answerQuestion,
+    isComplete,
     init,
+    submit,
+    score,
   };
 }
 

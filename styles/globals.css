@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 .scrolled {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  @apply fixed top-0 left-0 right-0;
+}
+
+input[type='radio'] {
+  @apply absolute top-0 bottom-0 left-3 scale-150;
 }

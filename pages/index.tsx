@@ -4,7 +4,6 @@ import TopHeader from '../components/topheader';
 import type { NextPage } from 'next';
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 import prisma from '../lib/prisma';
 
 export const getServerSideProps: GetServerSideProps = async () => {
