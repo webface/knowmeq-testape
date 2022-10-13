@@ -1,6 +1,6 @@
 # Next.js + Tailwind CSS Example
 
-Make sure Postgres is installed and running
+Make sure Postgres is installed and running and you have defined your postgres db in your env file.
 
 ```bash
 npm install
