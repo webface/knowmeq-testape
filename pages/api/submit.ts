@@ -29,12 +29,13 @@ export default async function handler(
       answer: c.answers.find((a) => a.correct)!.id,
     };
   });
-  let count = 0;
-  results.forEach((r: correctArr) => {
-    if (map.find((a) => a.question === r.question && a.answer === r.answer)) {
-      count++;
+  const count = results.reduce((acc: number, answer: any) => {
+    const correctAnswer = map.find((a) => a.question === answer.question);
+    if (correctAnswer?.answer === answer.answer) {
+      acc++;
     }
-  });
+    return acc;
+  }, 0);
 
   const score = Math.round(Math.floor((count / map.length) * 100));
   res.status(200).json({ score });
