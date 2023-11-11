@@ -1,8 +1,7 @@
 import { Quiz } from '@prisma/client';
 import Navigation from '../components/navigation';
 import TopHeader from '../components/topheader';
-import type { NextPage } from 'next';
-import type { GetServerSideProps } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import Head from 'next/head';
 import prisma from '../lib/prisma';
 
